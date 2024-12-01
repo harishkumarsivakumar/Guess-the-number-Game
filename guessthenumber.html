@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess the Number Between</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f7f9fc;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #4caf50;
+    }
+
+    input {
+      font-size: 18px;
+      padding: 8px;
+      width: 200px;
+      margin: 10px 0;
+      border: 2px solid #4caf50;
+      border-radius: 5px;
+    }
+
+    button {
+      font-size: 18px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    #result {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Guess the Number</h1>
+  <input id="guessnumber" type="number" placeholder="Enter a number between 1-10">
+  <button onclick="check()">Check</button>
+  <p id="result">Make a guess!</p>
+  <p id="score">Score: 10</p>
+  
+  <script>
+    // Getting elements
+    var guessnumber = document.getElementById("guessnumber");
+    var result = document.getElementById("result");
+    var score = document.getElementById("score");
+
+    // Random number between 1 and 10
+    var randomNumber = Math.floor(Math.random() * 10) + 1;
+    var totalscore = 10;
+
+    // Function to check the guess
+    function check() {
+      var enterednumber = Number(guessnumber.value); // Get entered value as a number
+
+      if (randomNumber === enterednumber) {
+        result.textContent = "🎉 Right! You guessed it!";
+        result.style.color = "green";
+        alert("🎉 YOU WON!");
+      } else {
+        totalscore -= 1; // Reduce score by 1
+        score.textContent = "Score: " + totalscore;
+        result.textContent = "❌ Wrong, try again!";
+        result.style.color = "red";
+
+        if (totalscore === 0) {
+          alert("Game Over! The number was: " + randomNumber);
+          // Reset game
+          totalscore = 10;
+          randomNumber = Math.floor(Math.random() * 10) + 1;
+          score.textContent = "Score: 10";
+          result.textContent = "Make a guess!";
+          result.style.color = "#333";
+        }
+      }
+
+      // Clear the input field
+      guessnumber.value = "";
+    }
+  </script>
+</body>
+</html>
